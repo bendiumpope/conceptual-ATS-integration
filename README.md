@@ -47,8 +47,10 @@
 
 ## STEPS TO TEST THE PROJECT LOCALLY SETUP
 
-#### npm install: to install dependencies
+```
+npm install: to install dependencies
 
-#### npm seed: to seed data to the db
+npm seed: to seed data to the db
 
-#### npm start: to start the express server locally
+npm start: to start the express server locally
+```
