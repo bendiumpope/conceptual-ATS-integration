@@ -50,4 +50,4 @@
 
 #### npm seed: to seed data to the db
 
-#### npm start
+#### npm start: to start the express server locally
