@@ -13,11 +13,15 @@ const contactValidator = (req, res, next) => {
     typeof cv != "string";
 
   if (invalidPayload) {
-    res.status(404).send({ status: "fail", message: "invalid payload" });
+    return res
+      .status(404)
+      .send({ status: "fail", message: "missing required fields" });
   }
 
   if (invalidPayloadType) {
-    res.status(404).send({ status: "fail", message: "invalid payload type" });
+    return res
+      .status(400)
+      .send({ status: "fail", message: "invalid payload type" });
   }
 
   next();
@@ -33,13 +37,13 @@ const applicationValidator = (req, res, next) => {
   if (invalidPayload) {
     return res
       .status(404)
-      .send({ status: "fail", message: "Application= invalid payload" });
+      .send({ status: "fail", message: "missing required field" });
   }
 
   if (invalidPayloadType) {
     return res
-      .status(404)
-      .send({ status: "fail", message: "Application= invalid payload type" });
+      .status(400)
+      .send({ status: "fail", message: "invalid payload type" });
   }
 
   next();

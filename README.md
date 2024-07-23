@@ -4,7 +4,7 @@
 
 ```
     What should happen to the contact in a case where the application fails?
-    If in this case we will what to rollback, with the current design of making 2 http calls to create contacts and applications differently, we will not be able to use transactions to manage this rollback. I will advice we handle both contact creation and application creation in the same controller so as to utilize transactions efficiently.
+    In this case if we will what to rollback, with the current design of making 2 http calls to create contacts and applications differently, we will not be able to use transactions to manage this rollback. I will advice we handle both contact creation and application creation in the same controller so as to utilize transactions efficiently.
     Are there any specific validation rules for the input data beyond the format provided?
     Should the CV be handled in a specific way if it exceeds a certain size?
     Is there any required file storage infrastructure to use for storing the file?

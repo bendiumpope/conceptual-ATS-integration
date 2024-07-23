@@ -40,6 +40,10 @@ const createExternalATS = async (req, res) => {
       contactPayload
     );
 
+    if (data.status === "fail") {
+      return res.status(500).send({ message: "fail", message: data.message });
+    }
+
     const contactId = data.contactId;
 
     const applicationPayload = {

@@ -6,7 +6,7 @@ function formatPhoneNumber(phone) {
   if (phoneNumber) {
     return phoneNumber.formatInternational();
   } else {
-    throw new Error("Invalid phone number");
+    return "";
   }
 }
 
@@ -15,6 +15,11 @@ const createContact = async (req, res) => {
   const { firstName, lastName, email, city, cv, motivation } = payload;
   const phone = formatPhoneNumber(payload.phone);
 
+  if (!phone) {
+    return res
+      .status(400)
+      .send({ status: "fail", message: "Invalid phone number" });
+  }
   const contactData = {
     firstName,
     lastName,
@@ -27,7 +32,7 @@ const createContact = async (req, res) => {
 
   const { dataValues } = await Contact.create(contactData);
 
-  res.status(200).send({ message: "success", contactId: dataValues.id });
+  res.status(200).send({ status: "success", contactId: dataValues.id });
 };
 
 module.exports = {
