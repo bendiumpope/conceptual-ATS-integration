@@ -1,9 +1,10 @@
 const cron = require("node-cron");
-const { Contact, Application, sequelize } = require("../models");
+const fs = require("fs").promises;
 const { Op } = require("sequelize");
+const { Contact, Application, sequelize } = require("../models");
 
 // Schedule the cron job to run daily at midnight
-cron.schedule("0 0 * * *", async () => {
+cron.schedule("0 0 * * 0", async () => {
   try {
     console.log("Running cron job to delete orphaned contacts...");
 
@@ -20,6 +21,14 @@ cron.schedule("0 0 * * *", async () => {
 
     // Delete orphaned contacts
     for (const contact of orphanedContacts) {
+      const cv = JSON.parse(contact.cv);
+      const filePath = cv.path;
+
+      // Delete the file if it exists
+      if (filePath) {
+        await fs.unlink(filePath);
+        console.log(`Deleted file: ${filePath}`);
+      }
       await contact.destroy();
     }
 
